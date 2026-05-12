@@ -1,329 +1,967 @@
 <!DOCTYPE html>
-<html>
-
-
+<html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="shortcut icon" href="./assets/img/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Sutan Fanabih — Portfolio</title>
 
-  <title>Profile | Sutan Fanabih</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
   <style>
-    .progress-bar {
-        width: 200px;
-        height: 10px;
-        background-color: #ddd;
-        border-radius: 5px;
-        overflow: hidden;
+    :root {
+      --ink:      #0d0d0d;
+      --paper:    #f5f3ef;
+      --muted:    #8a8a8a;
+      --accent:   #b89c6e;
+      --border:   #e2ddd6;
+      --card-bg:  #ffffff;
     }
 
-    .progress {
-        width: 50%;
-        height: 100%;
-        background-color: #4CAF50;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
-    
-    .progress1 {
-        width: 70%;
-        height: 100%;
-        background-color: #4CAF50;
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    .display-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
     }
-</style>
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      color: var(--ink);
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245, 243, 239, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--ink); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      padding-top: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .hero-text { padding: 2rem 0; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border-radius: 2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 380px;
+      margin-top: 1.2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.4rem;
+    }
+
+    .btn-primary-custom {
+      background: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+      padding: .7rem 1.8rem;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+    }
+
+    .btn-primary-custom:hover {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: .7rem 1.8rem;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: .05em;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-outline-custom:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-img-frame {
+      position: relative;
+      width: 240px;
+      height: 320px;
+    }
+
+    .hero-img-frame::before {
+      content: '';
+      position: absolute;
+      top: 16px; left: 16px;
+      right: -16px; bottom: -16px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .hero-img-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: grayscale(20%);
+    }
+
+    .hero-socials {
+      position: absolute;
+      right: -48px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 2;
+    }
+
+    .hero-socials a {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--muted);
+      font-size: .95rem;
+      text-decoration: none;
+      background: var(--paper);
+      transition: border-color .2s, color .2s;
+    }
+
+    .hero-socials a:hover { border-color: var(--ink); color: var(--ink); }
+
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 80px;
+        padding-bottom: 3rem;
+        min-height: auto;
+      }
+      .hero-image-wrap { order: -1; }
+      .hero-subtitle { margin: 1rem auto 0; }
+      .hero-actions { justify-content: center; }
+      .hero-img-frame { width: 260px; height: 320px; }
+      .hero-socials {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        transform: none;
+        margin-top: 1.5rem;
+      }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 0; }
+
+    .container-narrow {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--card-bg); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem 3rem;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 1rem;
+      padding: .8rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .info-label {
+      min-width: 90px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    .info-value { color: var(--ink); }
+
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--paper); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.4rem 1.2rem;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .skill-icon {
+      font-size: 1.5rem;
+      margin-bottom: .7rem;
+      color: var(--accent);
+    }
+
+    .skill-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .skill-cat {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--card-bg); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--paper);
+      transition: border-color .2s, transform .25s;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .project-header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.8rem 1.5rem;
+      position: relative;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .project-number {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem;
+      opacity: .1;
+      line-height: 1;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-body { padding: 1.5rem; }
+
+    .project-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: .8rem;
+    }
+
+    .project-meta-item { font-size: 12px; color: var(--muted); }
+    .project-meta-item span { color: var(--ink); font-weight: 500; }
+
+    .difficulty-bar {
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: .8rem 0 1.2rem;
+      overflow: hidden;
+    }
+
+    .difficulty-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    .project-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: gap .2s;
+    }
+
+    .project-link:hover { gap: .8rem; color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--paper); }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .contact-text .lead {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: .8rem;
+      max-width: 340px;
+    }
+
+    .contact-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: .8rem; }
+
+    .contact-list li a {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+
+    .contact-list li a:hover { color: var(--accent); }
+
+    .contact-list li a .ci {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+      transition: border-color .2s;
+    }
+
+    .contact-list li a:hover .ci { border-color: var(--accent); }
+
+    .contact-card {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 6px;
+      padding: 2.5rem;
+    }
+
+    .contact-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: .8rem;
+    }
+
+    .contact-card p {
+      color: rgba(255,255,255,.55);
+      font-size: 14px;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-card .btn-primary-custom {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+      display: inline-block;
+    }
+
+    .contact-card .btn-primary-custom:hover {
+      background: transparent;
+      color: var(--paper);
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--muted); text-decoration: underline; }
+
+    /* ── DIVIDER ── */
+    .ornament {
+      display: flex; align-items: center; gap: .8rem;
+      margin-bottom: .5rem;
+    }
+
+    .ornament span {
+      width: 24px; height: 1px;
+      background: var(--accent);
+      display: block;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
+<body>
 
-<body class="text-gray-800  antialiased">
-  <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 ">
+  <!-- NAV -->
+  <nav class="site-nav">
+    <a href="#hero" class="nav-brand">Sutan Fanabih.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="bi bi-list"></i>
+    </button>
   </nav>
-  <main class="profile-page">
-    <section class="relative block" style="height: 500px;">
-      <div class="absolute top-0 w-full h-full bg-center bg-cover"
-        style='background-image: url("./assets/img/keren.svg");'>
-        <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text reveal">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Available for work
       </div>
-      <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-        style="height: 70px;">
-        <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-          version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-          <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
+      <h1 class="display-name">Sutan<br /><em>Fanabih</em></h1>
+      <p class="hero-subtitle">Web Developer &amp; Owner of Faimor Tim Officer — crafting clean digital experiences from Bekasi, Indonesia.</p>
+      <div class="hero-actions">
+        <a href="./assets/CV_Sutan Fajrin Abi Hartono new2.pdf" target="_blank" class="btn-primary-custom">
+          <i class="bi bi-download me-2"></i>Download CV
+        </a>
+        <a href="#contact" class="btn-outline-custom">Get in Touch</a>
       </div>
-    </section>
-    <section class="relative py-16 bg-gray-300">
-      <div class="container mx-auto px-4">
-        <div class="relative flex flex-col min-w-0 break-words bg-gray-200 p-8 w-full mb-6 shadow-xl rounded-lg -mt-64">
-          <div class="px-6">
-            <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                <div class="relative">
-                  <img alt="..." src="./assets/img/Sutan.jpg"
-                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
-                    style="max-width: 120px; margin: -60px;" />
-                </div>
-              </div>
-              <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-center lg:self-center">
-                <div class="flex justify-center py-4 px-3 mt-32 sm:mt-0 ">
-                  <div class="mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button">
-                      <a href="https://www.linkedin.com/in/sutan-fanabih/" target="_blank"
-                        class="flex fab fa-linkedin"></a></button>
-                  </div>
-                  <div class="mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="https://www.instagram.com/sufftann/" target="_blank"
-                        class="flex fab fa-instagram fa-lg"></a></button>
-                  </div>
-                  <div class="lg:mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-black-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="https://github.com/fanabihcodes" target="_blank"
-                        class="flex fab fa-github fa-lg"></a></button>
-                  </div>
-                  <div class="lg:mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-pink-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="mailto: sutanfanabih.team@gmail.com" class="flex fa fa-envelope fa-lg"></a></button>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                <!-- <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                  <div class="mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button">
-                      <a href="https://www.behance.net/sutanfanabih" target="_blank"
-                        class="flex fab fa-behance"></a></button>
-                  </div>
-                  <div class="mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="https://www.instagram.com/sufftann/" target="_blank"
-                        class="flex fab fa-instagram fa-lg"></a></button>
-                  </div>
-                  <div class="lg:mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-black-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="https://github.com/fanabihcodes" target="_blank"
-                        class="flex fab fa-github fa-lg"></a></button>
-                  </div>
-                  <div class="lg:mr-1 p-3 text-center">
-                    <button
-                      class="bg-white text-pink-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-1 p-3"
-                      type="button">
-                      <a href="mailto: sutanfanabih.team.com" class="flex fa fa-envelope fa-lg"></a></button>
-                  </div>
-                </div> -->
-              </div>
+    </div>
+
+    <div class="hero-image-wrap reveal">
+      <div class="hero-img-frame">
+        <img src="https://fanabihcodes.github.io/Profile/assets/img/Sutan.jpg" alt="Sutan Fanabih" />
+        <div class="hero-socials">
+          <a href="https://www.linkedin.com/in/sutan-fanabih/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.instagram.com/sufftann/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://github.com/fanabihcodes" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="https://twitter.com/Sutanfan" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container-narrow">
+      <div class="section-header reveal">
+        <div>
+          <div class="ornament"><span></span><p class="section-label mb-0">Who I am</p></div>
+          <h2 class="section-title">About Me</h2>
+        </div>
+      </div>
+      <div class="info-grid reveal">
+        <div class="info-item">
+          <span class="info-label">Full Name</span>
+          <span class="info-value">Sutan Fajrin Abi Hartono</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Birthday</span>
+          <span class="info-value">03 September 1998</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Education</span>
+          <span class="info-value">STMIK Bani Saleh</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Location</span>
+          <span class="info-value">Bekasi, Indonesia</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email</span>
+          <span class="info-value">sutanfanabih.team@gmail.com</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Languages</span>
+          <span class="info-value">Indonesian, English</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Mobile</span>
+          <span class="info-value">(+62) 823-2171-****</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Role</span>
+          <span class="info-value">Owner — Faimor Tim Officer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container-narrow">
+      <div class="section-header reveal">
+        <div>
+          <div class="ornament"><span></span><p class="section-label mb-0">What I know</p></div>
+          <h2 class="section-title">Skills</h2>
+        </div>
+      </div>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-filetype-html"></i></div>
+          <div class="skill-name">HTML5</div>
+          <div class="skill-cat">Web Development</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-filetype-css"></i></div>
+          <div class="skill-name">CSS3</div>
+          <div class="skill-cat">Styling & Layout</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-filetype-js"></i></div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-cat">Programming Language</div>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-database"></i></div>
+          <div class="skill-name">SQL</div>
+          <div class="skill-cat">Database Management</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-ubuntu"></i></div>
+          <div class="skill-name">Windows</div>
+          <div class="skill-cat">Operating Systems</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-git"></i></div>
+          <div class="skill-name">Git</div>
+          <div class="skill-cat">Version Control</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="bi bi-layout-sidebar-inset"></i></div>
+          <div class="skill-name">UI/UX Design</div>
+          <div class="skill-cat">Design & Prototyping</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container-narrow">
+      <div class="section-header reveal">
+        <div>
+          <div class="ornament"><span></span><p class="section-label mb-0">What I built</p></div>
+          <h2 class="section-title">Projects</h2>
+        </div>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">01</span>
+            <h3 class="project-title">Faimor Website</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>2 Months</span></div>
+              <div class="project-meta-item">Complexity <span>50%</span></div>
             </div>
-            <div class="text-center mt-12">
-              <h3 class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                Sutan Fanabih
-              </h3>
-              <div class="text-sm leading-normal text-gray-500 font-bold uppercase">
-                <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-                <a href="https://goo.gl/maps/jj2AQgtdXg11sdqG8" target="_blank">Bekasi, Indonesia</a>
-              </div>
-              <div class="mb-2 text-gray-700 ">
-                <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-                Owner - <a href="https://faimor.netlify.app/#" class="font-normal text-gray-500 hover:text-gray-900"
-                  target="_blank">Faimor Tim Officer</a>
-              </div>
-              <div class="mb-2 text-gray-700">
-                <i class="fas fa-download mr-2 text-lg text-gray-500"></i>
-                <a href="./assets/Sutan Fajrin Abi Hartono_ATS1.pdf"
-                  class="font-normal text-gray-500 hover:text-gray-900" target="_blank">Download My CV</a>
-              </div>
-              <div class="w-full flex flex-col 2xl:w-1/3">
-                <div class="flex-1 bg-white rounded-lg shadow-xl p-8 text-left">
-                  <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
-                  <ul class="mt-2 text-gray-700">
-                    <li class="flex border-y py-2">
-                      <a class="font-bold w-24">Full name:</a>
-                      <a class="text-gray-700">&nbsp; Sutan Fajrin Abi Hartono</a>
-                    </li>
-                    <li class="flex border-b py-2">
-                      <span class="font-bold w-24">Birthday:</span>
-                      <span class="text-gray-700">&nbsp; 03 September, 1998</span>
-                    </li>
-                    <li class="flex border-b py-2">
-                      <span class="font-bold w-24">Education:</span>
-                      <span class="text-gray-700">&nbsp; STMIK Bani Saleh</span>
-                    </li>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:50%"></div></div>
+            <a href="https://faimor.netlify.app/" target="_blank" class="project-link">
+              Visit Site <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
 
-                    <li class="flex border-b py-2">
-                      <span class="font-bold w-24">Mobile:</span>
-                      <span class="text-gray-700">&nbsp; (+62) 823-2171-****</span>
-                    </li>
-                    <li class="flex border-b py-2">
-                      <span class="font-bold w-24">Location:</span>
-                      <span class="text-gray-700">&nbsp; Indonesia, Jakarta</span>
-                    </li>
-                    <li class="flex border-b py-2">
-                      <span class="font-bold w-24">Languages:</span>
-                      <span class="text-gray-700">&nbsp; Indonesia, English</span>
-                    </li>
-
-                  </ul>
-                  <p class="mb-1 py-2 text-l leading-relaxed text-blueGray-700 justify-left">
-                    <a class="font-bold w-24">Email:</a>
-                    <a class="text-gray-700 "> Sutanfanabih.team@gmail.com</a>
-                  </p>
-                  <p class="mb-3 text-l leading-relaxed text-blueGray-700 justify-between">
-                    <a class="font-bold w-24">Skills:</a>
-                    <a class="text-gray-700 ">
-                      <li>Programming Languages: Css, Html and JavaScript</li>
-                      <li> Database Management: SQL</li>
-                      <li> Web Development: HTML, CSS, React</li>
-                      <li> Operating Systems: Windows, Linux, MacOs</li>
-                    </a>
-                  </p>
-                </div>
-              </div>
-
-              <div class="w-full flex flex-col 2xl:w-1/3 mx-auto">
-                <br>
-                <div class="w-full flex flex-col 2xl:w-1/3">
-                  <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-                    <h4 class="text-xl text-left text-gray-900 font-bold">Projects: </h4>
-                    <ul class="mt-2 text-gray-700">
-                      <li class="flex border-y py-2">
-                        <a class="font-bold w-24">Name Project:</a>
-                        <a class="text-gray-700 ">&nbsp;Faimor Website</a>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Duration:</span>
-                        <span class="text-gray-700">&nbsp; 2 Month</span>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Difficulty: </span>
-                        <span class="text-gray-700">&nbsp; 50%</span>
-                      </li>
-                      <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                      <li class="flex border-b py-2">
-                        <a href="https://faimor.netlify.app/#" target="_blank" class="font-semibold w-24 text-blue-400	">Link</a>
-                      </li>
-
-                      <li class="flex border-y py-2">
-                        <a class="font-bold w-24">Name Project:</a>
-                        <a class="text-gray-700 ">&nbsp;Qolbi Florist Website</a>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Duration:</span>
-                        <span class="text-gray-700">&nbsp; 1 Month</span>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Difficulty: </span>
-                        <span class="text-gray-700">&nbsp; 70%</span>
-                      </li>
-                      <div class="progress-bar">
-                        <div class="progress1"></div>
-                        </div>
-                        <li class="flex border-b py-2">
-                          <a href="https://qolbi-florist.netlify.app/" target="_blank" class="font-semibold w-24 text-blue-400	">Link</a>
-                        </li>
-                       
-
-                      <li class="flex border-y py-2">
-                        <a class="font-bold w-24">Name Project:</a>
-                        <a class="text-gray-700 ">&nbsp;UI/UX Fuku.id </a>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Duration:</span>
-                        <span class="text-gray-700">&nbsp; 1 Month</span>
-                      </li>
-                      <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Difficulty: </span>
-                        <span class="text-gray-700">&nbsp; 70%</span>
-                      </li>
-                      <div class="progress-bar">
-                        <div class="progress1"></div>
-                        </div>
-                      <!-- component -->
-                      <li class="flex border-b py-2">
-                        <a href="./assets/img/uiux1.png" target="_blank" class="font-semibold w-24 text-blue-400	">Link</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
+        <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">02</span>
+            <h3 class="project-title">Qolbi Florist</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>1 Month</span></div>
+              <div class="project-meta-item">Complexity <span>70%</span></div>
             </div>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:70%"></div></div>
+            <a href="https://qolbi-florist.netlify.app/" target="_blank" class="project-link">
+              Visit Site <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">03</span>
+            <h3 class="project-title">UI/UX Fuku.id</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>1 Month</span></div>
+              <div class="project-meta-item">Complexity <span>70%</span></div>
+            </div>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:70%"></div></div>
+            <a href="https://fanabihcodes.github.io/Profile/assets/img/uiux1.png" target="_blank" class="project-link">
+              View Design <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+         <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">04</span>
+            <h3 class="project-title">Company Profile Aalborgindo</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>1 Week</span></div>
+              <div class="project-meta-item">Complexity <span>10%</span></div>
+            </div>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:70%"></div></div>
+            <a href="https://aalborgindo.com" target="_blank" class="project-link">
+              View Site <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+         <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">05</span>
+            <h3 class="project-title">Company Profile Green Marte</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>1 Week</span></div>
+              <div class="project-meta-item">Complexity <span>10%</span></div>
+            </div>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:70%"></div></div>
+            <a href="https://greenmarte.com" target="_blank" class="project-link">
+              View Site <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+         <div class="project-card reveal">
+          <div class="project-header">
+            <span class="project-number">06</span>
+            <h3 class="project-title">Company Profile Garam Nusa Mandiri</h3>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <div class="project-meta-item">Duration <span>1 Week</span></div>
+              <div class="project-meta-item">Complexity <span>10%</span></div>
+            </div>
+            <div class="difficulty-bar"><div class="difficulty-fill" style="width:70%"></div></div>
+            <a href="https://garamnusamandiri.com" target="_blank" class="project-link">
+              View Site <i class="bi bi-arrow-right"></i>
+            </a>
           </div>
         </div>
       </div>
-    </section>
-
-  </main>
-
-  <footer class="relative bg-gray-300 pt-8 pb-6">
-    <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
-      style="height: 80px;">
-      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-        version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
     </div>
+  </section>
 
-    <hr class="my-6 border-gray-400" />
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-        <h4 class="text-3xl font-semibold">Stay Connected</h4>
-        <h5 class="text-lg mt-0 mb-2 text-gray-700">
-          Find me on other media </h5>
-        <div class="mt-6">
-          <button
-            class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-            type="button">
-            <a href="https://www.linkedin.com/in/sutan-fanabih/" class="flex fab fa-linkedin"></a></button>
-          <button
-            class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-            type="button">
-            <a href="https://twitter.com/Sutanfan" class="flex fab fa-twitter"></a></button>
-          <button
-            class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-            type="button">
-            <i class="flex fab fa-dribbble"></i></button>
-          <button
-            class="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-            type="button">
-            <a href="https://github.com/fanabihcodes" target="_blank" class="flex fab fa-github"></a>
-          </button>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container-narrow">
+      <div class="section-header reveal">
+        <div>
+          <div class="ornament"><span></span><p class="section-label mb-0">Let's talk</p></div>
+          <h2 class="section-title">Contact</h2>
         </div>
-
-        <div class="text-sm text-gray-600 font-semibold py-1">
-          Copyright © 2019
-          <a href="https://www.creative-tim.com" class="text-gray-600 hover:text-gray-900"></a>
-
+      </div>
+      <div class="contact-inner">
+        <div class="contact-text reveal">
+          <p class="lead">Have a project in mind? I'd love to hear about it. Send me a message and let's create something together.</p>
+          <ul class="contact-list">
+            <li>
+              <a href="mailto:sutanfanabih.team@gmail.com">
+                <span class="ci"><i class="bi bi-envelope"></i></span>
+                sutanfanabih.team@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/stnfnb/" target="_blank">
+                <span class="ci"><i class="bi bi-linkedin"></i></span>
+                linkedin.com/in/sutan-fanabih
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/fanabihcodes" target="_blank">
+                <span class="ci"><i class="bi bi-github"></i></span>
+                github.com/fanabihcodes
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/sufftann/" target="_blank">
+                <span class="ci"><i class="bi bi-instagram"></i></span>
+                @sufftann
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="contact-card reveal">
+          <h4>Ready to collaborate?</h4>
+          <p>I'm currently open to freelance projects and full-time opportunities. Let's build something great.</p>
+          <a href="mailto:sutanfanabih.team@gmail.com" class="btn-primary-custom">
+            <i class="bi bi-send me-2"></i>Send Email
+          </a>
         </div>
       </div>
     </div>
-    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2024 Sutan Fanabih.</p>
   </footer>
 
-</body>
-<script>
-  function toggleNavbar(collapseID) {
-    document.getElementById(collapseID).classList.toggle("hidden");
-    document.getElementById(collapseID).classList.toggle("block");
-  }
-</script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      hamburger.innerHTML = mobileMenu.classList.contains('open')
+        ? '<i class="bi bi-x"></i>'
+        : '<i class="bi bi-list"></i>';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.innerHTML = '<i class="bi bi-list"></i>';
+      });
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Staggered cards
+    document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 60}ms`;
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  </script>
+</body>
 </html>
